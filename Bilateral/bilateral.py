@@ -2,8 +2,6 @@ import numpy as np
 from PyQt5.QtGui import QImage, QColor, qRgb
 
 
-
-
 def create_color_tables(image, radius):
     color_table = np.zeros((image.width() + 2 * radius, image.height() + 2 * radius, 3), float)
 
@@ -26,7 +24,6 @@ def create_color_tables(image, radius):
 
 
 def bilateral(img, sigma, radius):
-
     constant1 = 1 / (sigma * np.sqrt(2 * np.pi))
     constant2 = - 1 / (2 * sigma * sigma)
 
@@ -81,12 +78,3 @@ def bilateral(img, sigma, radius):
             image.setPixel(i, j, qRgb(*new_color_table[i + radius, j + radius]))
 
     return image
-
-
-
-
-
-
-
-
-
