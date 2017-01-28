@@ -1,10 +1,13 @@
-from PyQt5 import QtGui, QtWidgets, uic, QtCore
 import sys
+
+from PyQt5 import QtGui, QtWidgets, uic
+
 from bilateral import bilateral
 
 app = QtWidgets.QApplication(sys.argv)
 defaultSigma = 100
 defaultRadius = 3
+
 
 class MainWindow (QtWidgets.QDialog):
     def __init__(self):
@@ -12,7 +15,6 @@ class MainWindow (QtWidgets.QDialog):
         uic.loadUi('bil.ui', self)
         self.pushButtonLoad.clicked.connect(self.load_image)
         self.pushButtonStart.clicked.connect(self.start)
-
 
     def load_image(self):
         file_name = QtWidgets.QFileDialog.getOpenFileName(self, "Open File", "./", "Images (*.png *.jpg)") #, str_filter=str("Image (*.jpg)"))#, str_caption="Load your image")

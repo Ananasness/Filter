@@ -1,5 +1,5 @@
-from PyQt5.QtGui import QImage, QColor, qRgb
 import numpy as np
+from PyQt5.QtGui import QImage, QColor, qRgb
 
 
 def gauss_func(x, sigma):
@@ -70,17 +70,17 @@ def update_color_table(color_table, radius):
 # where i, j are coordinates of central point of new subset
 # n is a radius new subset
 # dir is direction (x or y) if you want to get one-dimensional array
-def select_submatrix(matrix, i, j, n, dir=''):
+def select_submatrix(matrix, i, j, n, direction=''):
     # print(matrix.shape, type(matrix))
-    if dir == 'x':
+    if direction == 'x':
         return matrix[i - n: i + n + 1, j]
-    elif dir == 'y':
+    elif direction == 'y':
         return matrix[i, j - n: j + n + 1]
     else:
         return matrix[i - n: i + n + 1, j - n: j + n + 1]
 
 
-def gauss_filter(img, sigma, *, der=""):
+def gauss_filter(img, sigma, der="", *_):
 
     # copy of original image
     image = QImage(img)
@@ -99,21 +99,21 @@ def gauss_filter(img, sigma, *, der=""):
         gauss_matrix.append(gauss_func(i, sigma))
 
     # convolution with Gaussian function
-    for dir in ['x', 'y']:
+    for direction in ['x', 'y']:
 
         # we start traversal all pixels with considering the shift = radius
         for i in range(radius, width + radius):
             for j in range(radius, height + radius):
 
                 # select matrix for multiplying with kernel
-                selected_matrix = select_submatrix(color_table, i, j, radius, dir=dir)
+                selected_matrix = select_submatrix(color_table, i, j, radius, direction=direction)
 
                 # do it for each color in the pixel
                 for c in range(3):
                     one_color_matrix = selected_matrix[:, c]
                     new_color_table[i][j][c] = sum(one_color_matrix * gauss_matrix)
 
-        if (dir == 'x'):
+        if direction == 'x':
             color_table = update_color_table(new_color_table, radius)
             new_color_table = np.zeros(color_table.shape, float)
 
