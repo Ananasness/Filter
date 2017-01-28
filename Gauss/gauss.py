@@ -122,11 +122,9 @@ def gauss_filter(img, sigma, *, der=""):
     elif der == "y":
         new_color_table = derivateY(new_color_table)
 
-
     # build new image
     for i in range(width):
         for j in range(height):
-
             image.setPixel(i, j, qRgb(*new_color_table[i + radius, j + radius]))
 
     return image
