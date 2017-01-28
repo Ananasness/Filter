@@ -15,7 +15,7 @@ class MainWindow (QtWidgets.QDialog):
 
 
     def load_image(self):
-        file_name = QtWidgets.QFileDialog.getOpenFileName(self, "Open File", "/", "Images (*.png)") #, str_filter=str("Image (*.jpg)"))#, str_caption="Load your image")
+        file_name = QtWidgets.QFileDialog.getOpenFileName(self, "Open File", "./", "Images (*.png *.jpg)") #, str_filter=str("Image (*.jpg)"))#, str_caption="Load your image")
         self.image = QtGui.QImage(file_name[0])
         self.labelSource.setPixmap(QtGui.QPixmap.fromImage(self.image))
         self.labelSource.setScaledContents(True)
